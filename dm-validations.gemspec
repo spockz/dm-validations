@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dm-validations}
-  s.version = "1.1.1"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Guy van den Berg", "Emmanuel Gomez"]
-  s.date = %q{2011-07-15}
+  s.authors = [%q{Guy van den Berg}, %q{Emmanuel Gomez}]
+  s.date = %q{2011-09-09}
   s.description = %q{Library for performing validations on DataMapper resources and plain Ruby objects}
   s.email = %q{emmanuel.gomez@gmail.com}
   s.extra_rdoc_files = [
@@ -23,11 +23,16 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "dm-validations.gemspec",
+    "lib/data_mapper/core.rb",
+    "lib/data_mapper/support/assertions.rb",
+    "lib/data_mapper/support/equalizer.rb",
     "lib/data_mapper/support/ordered_set.rb",
     "lib/data_mapper/validation.rb",
     "lib/data_mapper/validation/backward.rb",
     "lib/data_mapper/validation/context.rb",
     "lib/data_mapper/validation/contextual_rule_set.rb",
+    "lib/data_mapper/validation/error_set.rb",
+    "lib/data_mapper/validation/exceptions.rb",
     "lib/data_mapper/validation/inferred.rb",
     "lib/data_mapper/validation/macros.rb",
     "lib/data_mapper/validation/message_transformer.rb",
@@ -70,9 +75,10 @@ Gem::Specification.new do |s|
     "lib/data_mapper/validation/rule_set.rb",
     "lib/data_mapper/validation/support/object.rb",
     "lib/data_mapper/validation/support/ordered_hash.rb",
-    "lib/data_mapper/validation/error_set.rb",
     "lib/data_mapper/validation/violation.rb",
     "lib/dm-validations.rb",
+    "spec/data_mapper/validation/resource_extensions/save_spec.rb",
+    "spec/data_mapper/validation/resource_extensions/validate_spec.rb",
     "spec/fixtures/barcode.rb",
     "spec/fixtures/basketball_court.rb",
     "spec/fixtures/basketball_player.rb",
@@ -192,11 +198,13 @@ Gem::Specification.new do |s|
     "tasks/yardstick.rake"
   ]
   s.homepage = %q{http://github.com/datamapper/dm-validations}
-  s.require_paths = ["lib"]
+  s.require_paths = [%q{lib}]
   s.rubyforge_project = %q{datamapper}
-  s.rubygems_version = %q{1.6.2}
+  s.rubygems_version = %q{1.8.6}
   s.summary = %q{Library for performing validations on DataMapper resources and plain Ruby objects}
   s.test_files = [
+    "spec/data_mapper/validation/resource_extensions/save_spec.rb",
+    "spec/data_mapper/validation/resource_extensions/validate_spec.rb",
     "spec/fixtures/barcode.rb",
     "spec/fixtures/basketball_court.rb",
     "spec/fixtures/basketball_player.rb",
@@ -315,21 +323,21 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<dm-core>, ["~> 1.1.0"])
-      s.add_development_dependency(%q<dm-types>, ["~> 1.1.0"])
+      s.add_runtime_dependency(%q<dm-core>, ["~> 1.2.0.rc1"])
+      s.add_development_dependency(%q<dm-types>, ["~> 1.2.0.rc1"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_development_dependency(%q<rspec>, ["~> 1.3.1"])
     else
-      s.add_dependency(%q<dm-core>, ["~> 1.1.0"])
-      s.add_dependency(%q<dm-types>, ["~> 1.1.0"])
+      s.add_dependency(%q<dm-core>, ["~> 1.2.0.rc1"])
+      s.add_dependency(%q<dm-types>, ["~> 1.2.0.rc1"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_dependency(%q<rspec>, ["~> 1.3.1"])
     end
   else
-    s.add_dependency(%q<dm-core>, ["~> 1.1.0"])
-    s.add_dependency(%q<dm-types>, ["~> 1.1.0"])
+    s.add_dependency(%q<dm-core>, ["~> 1.2.0.rc1"])
+    s.add_dependency(%q<dm-types>, ["~> 1.2.0.rc1"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
     s.add_dependency(%q<rspec>, ["~> 1.3.1"])
