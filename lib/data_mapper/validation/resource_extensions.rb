@@ -7,11 +7,9 @@ module DataMapper
 
     module ResourceExtensions
 
-      # TODO: contemplate reworking dm-core to allow hooks to be fired even if
-      #   the hooked event does not transpire (eg., `before :save` when clean)
-      # def self.included(model)
-      #   model.before :save, :validate_or_halt
-      # end
+      def self.included(model)
+        model.before :save, :validate_or_halt
+      end
 
       # Ensures the object is valid for the context provided, and otherwise
       # throws :halt and returns false.
@@ -31,15 +29,6 @@ module DataMapper
         validation_rules.assert_valid_context(context_name)
 
         Context.in_context(context_name) { super() }
-      end
-
-      # @api private
-      def save_self(*)
-        if Context.any? && !valid?(validation_rules.current_context)
-          false
-        else
-          super
-        end
       end
 
       # Ensures the object is valid for the context provided, and otherwise
@@ -114,12 +103,10 @@ module DataMapper
         end
       end
 
-      # @see note at self.included, above
-      # 
       # @api private
-      # def validate_or_halt
-      #   throw :halt if Context.any? && !valid?(validation_rules.current_context)
-      # end
+      def validate_or_halt
+        throw :halt if Context.any? && !valid?(validation_rules.current_context)
+      end
 
     end # module Resource
   end # module Validation
