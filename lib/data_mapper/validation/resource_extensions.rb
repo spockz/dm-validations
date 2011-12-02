@@ -108,7 +108,7 @@ module DataMapper
         context_name      = child_model.validation_rules.current_context
         child_collection  = relationship.get_collection(self)
 
-        child_collection.each do |child_resource|
+        child_collection.send(:loaded_entries).each do |child_resource|
           child_violations = child_resource.validation_violations(context_name)
           child_violations.each { |v| errors[relationship_name] << v }
         end
